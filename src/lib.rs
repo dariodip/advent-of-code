@@ -3,6 +3,7 @@
 
 mod year2021;
 mod input;
+mod common;
 
 use crate::input::{Input, Part};
 

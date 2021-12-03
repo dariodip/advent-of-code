@@ -19,7 +19,7 @@ fn main() -> Result<(), String> {
         return Ok(());
     }
 
-    if args.len() == 2 {
+    if args.len() == 3 {
         let day = &args[1];
         let part = &args[2];
         let mut input = String::new();
