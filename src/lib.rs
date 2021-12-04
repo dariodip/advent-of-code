@@ -2,6 +2,7 @@
 #![crate_name = "advent_of_code"]
 
 mod common;
+#[cfg_attr(test, macro_use)]
 mod input;
 mod year2021;
 
@@ -16,7 +17,7 @@ fn to_stringer_input<T: ToString>(
     function(input).map(|value| value.to_string())
 }
 
-pub fn solve(day: u8, part: u8, mut input: &str) -> Result<String, String> {
+pub fn solve(day: u8, part: u8, input: &str) -> Result<String, String> {
     if input.is_empty() {
         return Err("No input provided".to_string());
     } else if input.len() > 200_000 {
@@ -34,7 +35,7 @@ pub fn solve(day: u8, part: u8, mut input: &str) -> Result<String, String> {
 
     match day {
         1 => to_stringer_input(year2021::day01::solve, &mut input),
-        2 => to_stringer_input(year2021::day01::solve, &mut input),
+        2 => to_stringer_input(year2021::day02::solve, &mut input),
         _ => Err(format!("Unsupported day {}", day)),
     }
 }

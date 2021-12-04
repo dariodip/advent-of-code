@@ -1,4 +1,5 @@
 #![allow(clippy::redundant_pub_crate)]
+#![allow(dead_code)]
 
 #[derive(Copy, Clone)]
 pub enum Part {
