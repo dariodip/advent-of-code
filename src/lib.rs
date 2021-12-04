@@ -19,7 +19,7 @@ fn to_stringer_input<T: ToString>(
 pub fn solve(day: u8, part: u8, mut input: &str) -> Result<String, String> {
     if input.is_empty() {
         return Err("No input provided".to_string());
-    } else if input.len() > 200_00 {
+    } else if input.len() > 200_000 {
         return Err("Input too large".to_string());
     } else if !input.is_ascii() {
         return Err("Non-ASCII input provided".to_string());
