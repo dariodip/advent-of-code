@@ -1,9 +1,9 @@
 #![forbid(unsafe_code)]
 #![crate_name = "advent_of_code"]
 
-mod year2021;
-mod input;
 mod common;
+mod input;
+mod year2021;
 
 use crate::input::{Input, Part};
 
@@ -17,7 +17,6 @@ fn to_stringer_input<T: ToString>(
 }
 
 pub fn solve(day: u8, part: u8, mut input: &str) -> Result<String, String> {
-
     if input.is_empty() {
         return Err("No input provided".to_string());
     } else if input.len() > 200_00 {
@@ -30,7 +29,7 @@ pub fn solve(day: u8, part: u8, mut input: &str) -> Result<String, String> {
 
     let mut input = Input {
         part: if part == 1 { Part::One } else { Part::Two },
-        text: input
+        text: input,
     };
 
     match day {

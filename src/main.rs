@@ -28,7 +28,8 @@ fn main() -> Result<(), String> {
             .read_to_string(&mut input)
             .map_err(|e| format!("Error reading input: {}", e.to_string()))?;
 
-        let solution = solve_raw(day, part, input.as_ref()).unwrap_or_else(|e| format!("Error: {}", e));
+        let solution =
+            solve_raw(day, part, input.as_ref()).unwrap_or_else(|e| format!("Error: {}", e));
         println!("{}", solution);
     } else {
         usage();

@@ -1,5 +1,5 @@
 use crate::common::parse_lines;
-use crate::input::{Input, self};
+use crate::input::Input;
 
 pub fn solve(input: &mut Input) -> Result<u32, String> {
     let measurement = parse_lines::<u32>(input.text)?;

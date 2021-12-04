@@ -5,6 +5,4 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
 }
 
 #[test]
-pub fn tests() {
-
-}
+pub fn tests() {}
