@@ -1,5 +1,4 @@
 use crate::input::Input;
-use core::num;
 use std::fmt;
 
 /// Cell represents a cell of a board. Besides the number it contains the index
@@ -7,7 +6,7 @@ use std::fmt;
 /// it as extracted
 #[derive(Clone, Copy)]
 struct Cell {
-    /// the number
+    /// the number incremented by 1
     value: u8,
     /// the index of the column
     col: usize,
@@ -24,6 +23,8 @@ struct Board {
     cells: [Cell; 25],
     /// The index of the last value set
     last_set: usize,
+    /// Indicates whether the board has already won
+    has_won: bool,
 }
 
 impl Board {
@@ -37,60 +38,62 @@ impl Board {
                 row: 0,
             }; 25],
             last_set: 0,
+            has_won: false,
         }
     }
 
     fn add_row(&mut self, row: &[u8; 5]) -> Result<(), String> {
         if self.last_set >= 24 {
-            return Err(format!("Board already full when trying to insert {:?}", row));
+            return Err(format!(
+                "Board already full when trying to insert {:?}",
+                row
+            ));
         }
 
-        for cell in row {
+        for number in row {
             let row = self.last_set / 5;
             let col = self.last_set % 5;
+            let number = *number + 1;
 
             self.cells[self.last_set] = Cell {
-                value: *cell,
+                value: number,
                 row,
-                col,
+                col
             };
-            self.rows[row] += u32::from(*cell);
-            self.cols[col] += u32::from(*cell);
+            self.rows[row] += u32::from(number);
+            self.cols[col] += u32::from(number);
             self.last_set += 1;
         }
         Ok(())
     }
 
     fn try_mark(&mut self, num: u8) -> bool {
-        let mut win = false;
-        for cell in self.cells {
+        let num = num + 1;
+        for cell in self.cells.as_mut() {
             if cell.value == num {
+                cell.value = 0;
                 let row_idx = cell.row;
                 let col_idx = cell.col;
                 self.cols[col_idx] -= u32::from(num);
                 self.rows[row_idx] -= u32::from(num);
-                if self.cols[col_idx] == 0 {
-                    win = true;
-                    break;
-                }
-                if self.rows[row_idx] == 0 {
-                    win = true;
+                // if board is not maked as winner
+                // and one of cols or rows are winning
+                if self.cols[col_idx] == 0 || self.rows[row_idx] == 0 {
+                    self.has_won = true;
                     break;
                 }
             }
         }
 
-        win
+        self.has_won
     }
 
-    fn unmarked_sum(&self) -> Result<u32, String> {
-        if self.cols.iter().any(|n| *n == 0) {
-            Ok(self.cols.iter().map(|n| *n as u32).sum::<u32>())
-        } else if self.rows.iter().any(|n| *n == 0) {
-            Ok(self.rows.iter().map(|n| *n as u32).sum::<u32>())
-        } else {
-            Err("No winning side".to_string())
-        }
+    fn unmarked_sum(&self) -> u32 {
+        self.cells
+            .iter()
+            .filter(|n| n.value != 0)
+            .map(|n| (n.value - 1) as u32)
+            .sum()
     }
 }
 
@@ -142,10 +145,14 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
         })
         .collect::<Result<Vec<Board>, String>>()?;
 
+    let mut winners_left = input.part_values(1, boards.len());
     for number in extraction {
         for board in boards.iter_mut() {
-            if board.try_mark(number) {
-                return Ok(board.unmarked_sum()? * u32::from(number))
+            if !board.has_won && board.try_mark(number) {
+                winners_left -= 1;
+                if winners_left == 0 {
+                    return Ok(board.unmarked_sum() * u32::from(number));
+                }
             }
         }
     }
@@ -201,8 +208,8 @@ pub fn test_winning_board() -> Result<(), String> {
         won = board.try_mark(*num);
     }
     assert!(won);
-    let expected_rows = vec![0_u32, 53, 67, 42, 67];
-    let expected_cols = vec![28_u32, 33, 60, 53, 55];
+    let expected_rows = vec![0_u32, 57, 72, 47, 72];
+    let expected_cols = vec![31_u32, 37, 64, 57, 59];
     for (i, row_value) in board.rows.into_iter().enumerate() {
         assert_eq!(row_value, expected_rows[i]);
     }
@@ -228,8 +235,14 @@ pub fn test_board() -> Result<(), String> {
         let numbers = row_to_numbers(line)?;
         board.add_row(&numbers)?;
     }
-    let expected_rows = vec![63_u32, 61, 67, 42, 67];
-    let expected_cols = vec![58_u32, 46, 77, 64, 55];
+    let expected_rows = vec![63_u32, 61, 67, 42, 67]
+        .iter()
+        .map(|n| *n + 5)
+        .collect::<Vec<u32>>();
+    let expected_cols = vec![58_u32, 46, 77, 64, 55]
+        .iter()
+        .map(|n| *n + 5)
+        .collect::<Vec<u32>>();
     for (i, row_value) in board.rows.into_iter().enumerate() {
         assert_eq!(row_value, expected_rows[i]);
     }
@@ -244,6 +257,6 @@ pub fn tests() {
     use crate::input::{test_part_one, test_part_two};
 
     let file_input = include_str!("day04_input.txt");
-    test_part_one!(file_input => 111540);
-    //test_part_two!(file_input => 0);
+    test_part_one!(file_input => 55770);
+    test_part_two!(file_input => 2980);
 }
