@@ -42,6 +42,7 @@ pub fn solve(day: u8, part: u8, input: &str) -> Result<String, String> {
         6 => to_stringer_input(year2021::day06::solve, &mut input),
         7 => to_stringer_input(year2021::day07::solve, &mut input),
         8 => to_stringer_input(year2021::day08::solve, &mut input),
+        9 => to_stringer_input(year2021::day09::solve, &mut input),
         _ => Err(format!("Unsupported day {}", day)),
     }
 }
