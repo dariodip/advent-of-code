@@ -163,6 +163,6 @@ pub fn tests() {
     use crate::input::{test_part_one, test_part_two};
 
     let file_input = include_str!("day08_input.txt");
-    test_part_one!(file_input => 303);
-    //test_part_two!(file_input => 0);
+    test_part_one!(file_input => 491);
+    test_part_two!(file_input => 1075536);
 }
