@@ -8,13 +8,12 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
         board.advance();
         let current_flashes = board.flashes_count;
         if input.is_part_two() && current_flashes - previous_flashes == 100 {
-            return Ok(step)
+            return Ok(step);
         }
     }
 
     Ok(board.flashes_count)
 }
-
 
 struct Grid {
     cells: [u8; Self::SIZE * Self::SIZE],
@@ -31,19 +30,13 @@ impl Grid {
         };
 
         // remove whitespaces and collect in a String
-        let s = s
-            .chars()
-            .filter(|c| !c.is_whitespace())
-            .collect::<String>();
+        let s = s.chars().filter(|c| !c.is_whitespace()).collect::<String>();
 
         if s.len() != 100 {
-            return  Err("Grid must have 100 cels".to_string());
+            return Err("Grid must have 100 cels".to_string());
         }
         for (i, c) in s.chars().enumerate() {
-            let n = c
-                .to_string()
-                .parse::<u8>()
-                .map_err(|err| err.to_string())?;
+            let n = c.to_string().parse::<u8>().map_err(|err| err.to_string())?;
             board.cells[i] = n;
         }
 
@@ -79,9 +72,10 @@ impl Grid {
             return;
         }
 
-        self.set(x, y, current_value + 1);  // increment position
+        self.set(x, y, current_value + 1); // increment position
 
-        if current_value + 1 > 9 {  // flashed
+        if current_value + 1 > 9 {
+            // flashed
             self.set(x, y, 0);
             self.flashes_count += 1;
 
@@ -103,8 +97,7 @@ impl Grid {
 #[test]
 pub fn test_example() -> Result<(), String> {
     use crate::input::{test_part_one, test_part_two};
-    let example_input = 
-r#"5483143223
+    let example_input = r#"5483143223
     2745854711
     5264556173
     6141336146

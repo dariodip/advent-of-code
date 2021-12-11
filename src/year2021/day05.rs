@@ -8,8 +8,7 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
     let coords = get_points(input.text)?
         .into_iter()
         .filter(|(p1, p2)| {
-            is_straight_line(p1, p2) ||
-        (is_perfect_diagonal_line(p1, p2) ^ !input.is_part_two())
+            is_straight_line(p1, p2) || (is_perfect_diagonal_line(p1, p2) ^ !input.is_part_two())
         })
         .collect::<Vec<(Point, Point)>>();
 
@@ -54,7 +53,7 @@ fn get_straight_line(p1: &Point, p2: &Point) -> Vec<Point> {
     line
 }
 
-fn get_diagonal_line(p1: &Point, p2: &Point) -> Vec<Point>{
+fn get_diagonal_line(p1: &Point, p2: &Point) -> Vec<Point> {
     let mut line = Vec::new();
     let mut x = p1.0 as i32;
     let mut y = p1.1 as i32;
@@ -85,8 +84,7 @@ fn is_straight_line(start: &Point, end: &Point) -> bool {
 }
 
 fn is_perfect_diagonal_line(start: &Point, end: &Point) -> bool {
-    i32::abs(start.0 as i32 - end.0 as i32)
-    == i32::abs(start.1 as i32 - end.1 as i32) 
+    i32::abs(start.0 as i32 - end.0 as i32) == i32::abs(start.1 as i32 - end.1 as i32)
 }
 
 fn points_from_line(line: &str, sep: &str) -> Result<(Point, Point), String> {
@@ -141,7 +139,6 @@ pub fn test_get_diagonal_line() {
         assert_eq!(p, line.get(i).unwrap());
     }
 }
-
 
 #[test]
 pub fn test_points_from_line() -> Result<(), String> {

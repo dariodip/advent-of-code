@@ -11,12 +11,14 @@ pub fn solve(input: &mut Input) -> Result<u64, String> {
 
 fn initial_school(text: &str) -> Result<[u64; 9], String> {
     let mut school = [0_u64; 9];
-    let initial_fishes = text.split(',')
+    let initial_fishes = text
+        .split(',')
         .map(|n| n.trim())
         .filter(|n| !n.is_empty())
-        .map(|n| n.parse::<usize>()
-            .map_err(|err| format!("Error while parsing: {}", err))
-        )
+        .map(|n| {
+            n.parse::<usize>()
+                .map_err(|err| format!("Error while parsing: {}", err))
+        })
         .collect::<Result<Vec<usize>, String>>()?;
 
     for fish in initial_fishes.into_iter() {

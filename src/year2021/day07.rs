@@ -7,12 +7,8 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
         .map(str::parse::<u32>)
         .collect::<Result<Vec<u32>, _>>()
         .map_err(|_| "Input is not comma-separated u16 values".to_string())?;
-    
-    let max_value = numbers
-        .iter()
-        .max()
-        .cloned()
-        .unwrap_or(0);
+
+    let max_value = numbers.iter().max().cloned().unwrap_or(0);
 
     let distance_fn: fn(i32) -> i32 = input.part_values(identity, gaussian_sum);
 
@@ -20,8 +16,7 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
     for i in 0..=max_value {
         let consumption = numbers
             .iter()
-            .map(|n| 
-                distance_fn(*n as i32 - i as i32).abs())
+            .map(|n| distance_fn(*n as i32 - i as i32).abs())
             .sum::<i32>();
         if min_consuption > consumption {
             min_consuption = consumption;

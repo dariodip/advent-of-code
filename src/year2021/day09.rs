@@ -19,8 +19,8 @@ pub fn solve(input: &mut Input) -> Result<u32, String> {
             .map(|lp| {
                 let mut seen = HashSet::new();
                 basin(lp, max_x, max_y, &risk_matrix, &mut seen);
-                seen.len() as u32}
-            )
+                seen.len() as u32
+            })
             .collect::<Vec<_>>();
         lp_basins_size.sort_unstable();
         let lp_count = lp_basins_size.len() - 1;
@@ -38,7 +38,7 @@ fn basin(
     max_x: usize,
     max_y: usize,
     matrix: &[Vec<u8>],
-    seen: &mut HashSet<Location>
+    seen: &mut HashSet<Location>,
 ) -> HashSet<Location> {
     seen.insert(loc);
     let mut set = HashSet::new();
@@ -87,9 +87,7 @@ fn create_risk_matrix(input: &str) -> Result<Vec<Vec<u8>>, String> {
         .filter(|l| !l.is_empty())
         .map(|l| {
             l.chars()
-                .map(|c| c.to_string()
-                    .parse::<u8>()
-                    .map_err(|err| err.to_string()))
+                .map(|c| c.to_string().parse::<u8>().map_err(|err| err.to_string()))
                 .collect::<Result<Vec<u8>, String>>()
         })
         .collect::<Result<Vec<Vec<u8>>, String>>()
@@ -99,13 +97,7 @@ fn is_min(n: u8, els: Vec<Location>) -> bool {
     n < els.into_iter().map(|el| el.0).min().unwrap_or(0)
 }
 
-fn adjacents(
-    x: usize,
-    y: usize,
-    max_x: usize,
-    max_y: usize,
-    matrix: &[Vec<u8>],
-) -> Vec<Location> {
+fn adjacents(x: usize, y: usize, max_x: usize, max_y: usize, matrix: &[Vec<u8>]) -> Vec<Location> {
     let mut adjacent = Vec::new();
     if x != 0 {
         adjacent.push((matrix[x - 1][y], x - 1, y));

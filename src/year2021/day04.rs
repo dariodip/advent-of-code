@@ -58,7 +58,7 @@ impl Board {
             self.cells[self.last_set] = Cell {
                 value: number,
                 row,
-                col
+                col,
             };
             self.rows[row] += u32::from(number);
             self.cols[col] += u32::from(number);

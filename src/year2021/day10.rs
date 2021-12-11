@@ -15,7 +15,7 @@ pub fn solve(input: &mut Input) -> Result<u64, String> {
     } else {
         let mut scores = scores.collect::<Vec<u64>>();
         scores.sort_unstable();
-        Ok(scores[scores.len()/2])
+        Ok(scores[scores.len() / 2])
     }
 }
 
