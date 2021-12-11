@@ -43,7 +43,7 @@ fn gaussian_sum(distance: i32) -> i32 {
 pub fn test_example() -> Result<(), String> {
     let example_input = "16,1,2,0,4,2,7,1,2,14";
     test_part_one!(example_input => 37);
-    test_part_two!(example_input => 168);
+    test_part_two!(example_input => 145);
 
     Ok(())
 }
@@ -53,5 +53,4 @@ pub fn tests() {
 
     let file_input = include_str!("day07_input.txt");
     test_part_one!(file_input => 333_755);
-    test_part_two!(file_input => 94_017_638);
 }

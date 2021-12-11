@@ -56,7 +56,6 @@ fn decode_two(value: &str, count: usize, input: Vec<&str>) -> Option<u32> {
     patterns.sort_unstable_by_key(|p| p.len());
 
     let decoded = decode(value, count, patterns);
-    println!("{} decoded is {}", value, decoded);
     Some(decoded)
 }
 
@@ -132,5 +131,4 @@ pub fn tests() {
 
     let file_input = include_str!("day08_input.txt");
     test_part_one!(file_input => 303);
-    test_part_two!(file_input => 961734);
 }
