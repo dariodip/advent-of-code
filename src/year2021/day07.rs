@@ -49,8 +49,11 @@ pub fn test_example() -> Result<(), String> {
 }
 #[test]
 pub fn tests() {
-    use crate::input::{test_part_one, test_part_two};
+    use crate::input::{test_part_one, test_part_one_error, test_part_two_error};
 
     let file_input = include_str!("day07_input.txt");
     test_part_one!(file_input => 333_755);
+
+    test_part_one_error!("" => "Input is not comma-separated u16 values");
+    test_part_two_error!("" => "Input is not comma-separated u16 values");
 }

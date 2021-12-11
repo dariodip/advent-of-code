@@ -127,7 +127,7 @@ pub fn test_example() -> Result<(), String> {
 }
 #[test]
 pub fn tests() {
-    use crate::input::{test_part_one, test_part_two};
+    use crate::input::test_part_one;
 
     let file_input = include_str!("day08_input.txt");
     test_part_one!(file_input => 303);
