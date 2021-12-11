@@ -1,4 +1,7 @@
 # Advent of Code solutions
+
+[![Pipeline](https://github.com/dariodip/advent-of-code-2021/actions/workflows/rust.yml/badge.svg?branch=master)](https://github.com/dariodip/advent-of-code-2021/actions/workflows/rust.yml)
+
 Solutions to [Advent of Code](https://adventofcode.com/) problems 2021 in Rust.
 
 This repository holds a single Rust project that contains all the days.
