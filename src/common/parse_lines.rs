@@ -1,5 +1,4 @@
-use core::num;
-use std::{str::FromStr, vec};
+use std::str::FromStr;
 
 pub fn parse_lines<T: FromStr>(input: &str) -> Result<Vec<T>, String> {
     let f = |i: usize, line: &str| {
@@ -46,7 +45,7 @@ pub fn test_map_lines() -> Result<(), String> {
 pub fn test_parse_lines() -> Result<(), String> {
     let lines = "1\n2\n3\n";
 
-    let nums= parse_lines::<u8>(lines)?;
+    let nums = parse_lines::<u8>(lines)?;
     let expected = vec![1_u8, 2, 3];
 
     nums.iter()

@@ -104,7 +104,7 @@ fn parse(text: &str) -> Result<Vec<Instruction>, String> {
 
 #[test]
 pub fn test_example() -> Result<(), String> {
-    use crate::input::{test_part_one, test_part_two};
+    use crate::input::test_part_one;
     let example_input = r#"6,10
     0,14
     9,10
@@ -127,8 +127,7 @@ pub fn test_example() -> Result<(), String> {
     fold along y=7
     fold along x=5"#;
 
-    test_part_one!(example_input => 17);
-    // test_part_two!(example_input => 36);
+    test_part_one!(example_input => "17".to_string());
 
     Ok(())
 }
@@ -138,6 +137,6 @@ pub fn tests() {
     use crate::input::{test_part_one, test_part_two};
 
     let file_input = include_str!("day13_input.txt");
-    // test_part_one!(file_input => 5920);
-    // test_part_two!(file_input => 155477);
+    test_part_one!(file_input => 704.to_string());
+    test_part_two!(file_input => "HGAJBEHC".to_string());
 }
