@@ -6,7 +6,7 @@ pub fn solve(input: &mut Input) -> Result<u64, String> {
         .lines()
         .map(|l| l.trim())
         .filter(|l| !l.is_empty())
-        .map(|l| line_value(l))
+        .map(line_value)
         .filter(|(_, corrupt)| *corrupt == input.part_values(true, false))
         .map(|(v, _)| v);
 

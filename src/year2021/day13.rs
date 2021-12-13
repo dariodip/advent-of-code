@@ -98,7 +98,7 @@ fn parse(text: &str) -> Result<Vec<Instruction>, String> {
     text.lines()
         .map(|l| l.trim())
         .filter(|l| !l.is_empty())
-        .map(|l| Instruction::from_str(l))
+        .map(Instruction::from_str)
         .collect::<Result<Vec<Instruction>, String>>()
 }
 
