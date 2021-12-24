@@ -3,7 +3,7 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::fs::read_to_string;
 
 pub fn criterion_benchmark(c: &mut Criterion) {
-    let end_day = 15;
+    let end_day = 25;
     for day in 1..=end_day {
         let input_path = format!("src/year2021/day{:02}_input.txt", day);
         let input = read_to_string(input_path).unwrap();
