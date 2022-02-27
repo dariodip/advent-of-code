@@ -1,0 +1,20 @@
+#!/bin/sh
+
+RED='\033[0;31m'
+GREEN='\033[1;32m'
+NOCOLOR='\033[0m'
+
+echo "Commit-msg hook triggered!"
+
+echo "Checking if conventional commit is ok"
+result=0
+docker run --mount type=bind,source=${PWD}/.git,target=/app/.git\
+    jamars/commitlint-in-docker:0.1.2 sh -c 'commitlint -e'
+
+result=$?
+if [ $result != 0 ]; then
+    echo "${RED}Invalid commit message!${NOCOLOR}"
+    exit $result
+else
+    echo "${GREEN}Commit ok!${NOCOLOR}"
+fi

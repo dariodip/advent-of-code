@@ -20,3 +20,9 @@ To add a new solution (*day*), you need to:
 - Create a file `day01.rs` under `src/year2021`;
 - Add a function `pub fn solve(input: &mut Input) -> Result<u32, String>` under that file;
 - Export the function in `src/year2021/mod.rs`;
+
+## Git hooks configuration
+Execute this command to setup git hooks:
+```
+git config --local core.hooksPath ./hooks
+```

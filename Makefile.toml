@@ -1,6 +1,4 @@
-env_files = [
-    { path = "./.env.dist.local", profile = "development" }
-]
+env_files = [{ path = "./.env.dist.local", profile = "development" }]
 
 [tasks.clippy]
 command = "cargo"
@@ -9,6 +7,11 @@ args = ["clippy", "--", "-D", "warnings"]
 [tasks.format-check]
 command = "cargo"
 args = ["fmt", "--all", "--", "--check"]
+
+
+[tasks.format]
+command = "cargo"
+args = ["fmt", "--all", "--"]
 
 [tasks.watch]
 description = "Run the app in dev mode."
@@ -23,7 +26,7 @@ args = ["run", "--features=dev"]
 
 [tasks.release]
 description = "Makes release."
-run_task = { name = ["sweep-start", "build-release", "archive"]}
+run_task = { name = ["sweep-start", "build-release", "archive"] }
 
 [tasks.sweep-start]
 description = "Start cargo sweep"
@@ -33,7 +36,7 @@ args = ["sweep", "-s"]
 [tasks.build-release]
 description = "Runs cargo build --release."
 command = "cargo"
-args = [ "build", "--release", "--features=${ENV}"]
+args = ["build", "--release", "--features=${ENV}"]
 
 [tasks.cache-cleanup]
 description = "Clean CI cache"

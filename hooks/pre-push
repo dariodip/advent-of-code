@@ -1,0 +1,5 @@
+#!/bin/sh
+
+container=$(docker ps | grep "$(basename "$(pwd)")" | awk '{ print $1 }')
+docker exec ${container} cargo make check-format
+docker exec ${container} cargo clippy

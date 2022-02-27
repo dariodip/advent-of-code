@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "Pre-commit hook triggered!"
+
+container=$(docker ps | grep "$(basename "$(pwd)")" | awk '{ print $1 }')
+
+echo "Running cargo fmt --all in container '$container'..."
+docker exec "$container" sh -c "cd /workspaces/advent-of-code-2021 && cargo make -e RUST_LOG=info format && git add -u"
